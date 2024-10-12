@@ -196,35 +196,35 @@
     }
 
 /* 13. counterUp*/
-    $('.counter').counterUp({
-      delay: 10,
-      time: 3000
-    });
-    /*------------------
-        CountDown
-    --------------------*/
-    // For demo preview
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    if(mm == 12) {
-        mm = '01';
-        yyyy = yyyy + 1;
-    } else {
-        mm = parseInt(mm) + 1;
-        mm = String(mm).padStart(2, '0');
-    }
-    var timerdate = mm + '/' + dd + '/' + yyyy;
-    // For demo preview end
-    
+    // Set the end date for the countdown (19th October 2024)
+    const endDate = new Date('October 19, 2024 9:00:00').getTime();
+        
+    // Update the countdown every second
+    const countdownInterval = setInterval(function() {
+        // Get current time
+        const now = new Date().getTime();
+        
+        // Calculate time difference between now and end date
+        const timeLeft = endDate - now;
 
-    // Use this for real timer date
-    /*  var timerdate = "2020/01/01"; */
+        // Time calculations for days, hours, minutes, and seconds
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-	$("#countdown").countdown(timerdate, function(event) {
-        $(this).html(event.strftime("<div class='cd-item'><span>%D</span><p>Days</p> </div>" + "<div class='cd-item'><span>%H</span><p>Hrs</p> </div>" + "<div class='cd-item'><span>%M</span><p>Min</p> </div>" + "<div class='cd-item'><span>%S</span><p>Sec</p> </div>"));
-    });
+        // Display the results in the respective <span> elements
+        document.getElementById('days').innerText = days;
+        document.getElementById('hours').innerText = hours;
+        document.getElementById('minutes').innerText = minutes;
+        document.getElementById('seconds').innerText = seconds;
+
+        // If the countdown is over, stop the interval
+        if (timeLeft < 0) {
+            clearInterval(countdownInterval);
+            document.getElementById('countdown').innerHTML = "<p>Countdown Ended!</p>";
+        }
+    }, 1000);
 
 
 
