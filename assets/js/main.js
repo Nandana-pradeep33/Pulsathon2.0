@@ -197,7 +197,7 @@
 
 /* 13. counterUp*/
     // Set the end date for the countdown (19th October 2024)
-    const endDate = new Date('October 19, 2024 9:00:00').getTime();
+    const endDate = new Date('November 9, 2024 9:00:00').getTime();
         
     // Update the countdown every second
     const countdownInterval = setInterval(function() {
